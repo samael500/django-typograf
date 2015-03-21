@@ -55,8 +55,4 @@ target/
 
 ### custom ###
 venv/
-test_app/
-tests_django/
 migrations/
-manage.py
-db.sqlite3
