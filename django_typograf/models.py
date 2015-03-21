@@ -2,7 +2,7 @@ from django.db import models
 from django.db.models.base import ModelBase
 
 from django_typograf.exceptions import TypografFieldError
-from django_typograf.utils import make_typograf
+from django_typograf.utils import make_typograf, get_typograf_field_name, get_typograf_hash_field_name
 
 
 class TypografModelBase(ModelBase):
@@ -61,8 +61,8 @@ class TypografModelBase(ModelBase):
             typograf_field_hash = models.IntegerField(blank=True, null=True)
             typograf_field_hash.creation_counter += 0.0001
             # create fields name's
-            typograf_field_name = 'typograf_{field}'.format(field=field_name)
-            typograf_field_hash_name = 'typograf_{field}_hash'.format(field=field_name)
+            typograf_field_name = get_typograf_field_name(field_name)
+            typograf_field_hash_name = get_typograf_hash_field_name(field_name)
             # update attrs
             attrs.update({typograf_field_name: typograf_field, typograf_field_hash_name: typograf_field_hash})
 

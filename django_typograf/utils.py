@@ -23,3 +23,12 @@ def make_typograf(instance, fields):
             instance.__dict__['typograf_{field}_hash'.format(field=field)] = text_hash
             instance.__dict__['typograf_{field}'.format(field=field)] = typograf_text
     return instance
+
+
+def get_typograf_field_name(field_name):
+    """ Return field_name with typograf prefix """
+    return 'typograf_{field}'.format(field=field_name)
+
+def get_typograf_hash_field_name(field_name):
+    """ Return field_name with typograf prefix, and hash suffix """
+    return 'typograf_{field}_hash'.format(field=field_name)
