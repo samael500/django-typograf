@@ -1,0 +1,5 @@
+Django==1.7
+typograf==0.1
+pyflakes==0.8.1
+pylama==6.1.1
+pep8==1.5.7

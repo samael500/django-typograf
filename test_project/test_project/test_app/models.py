@@ -11,4 +11,4 @@ class TestAppModel(TypografModel):
     integer = models.IntegerField(blank=True, null=True)
 
     class Meta:
-        typograf = ('text', 'text2')
+        typograf = ('text', 'text2', )
