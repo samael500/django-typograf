@@ -35,8 +35,8 @@ class TypografModelBase(ModelBase):
         for base in bases:
             if hasattr(base, '_meta') and hasattr(base._meta, 'typografed_fields'):
                 inherited_typograf_fields.extend(list(base._meta.typografed_fields))
-        # validate the local_trans_fields
-        for field in local_trans_fields:
+        # validate the local_typograf_fields
+        for field in local_typograf_fields:
             if field not in attrs:
                 raise TypografFieldError('"{field}" can\'t be typografed cause it is not a field on the model\
                     "{name}"'.format(field=field, name=name))
@@ -51,7 +51,8 @@ class TypografModelBase(ModelBase):
             field = attrs[field_name]
             if not isinstance(field, (models.CharField, models.TextField)):
                 raise TypografFieldError(
-                    'Can\'t be typografed field "{field}". This must be a text or char field'.format(field=field))
+                    'Can\'t be typografed field "{field}".'
+                    ' This must be a text or char field.'.format(field=field_name))
             # create fields for store typografed text and typografed hash
             typograf_field = models.TextField(blank=True, null=True)
             typograf_field.creation_counter += 0.0001
@@ -61,16 +62,14 @@ class TypografModelBase(ModelBase):
             typograf_field_name = 'typograf_{field}'.format(field=field_name)
             typograf_field_hash_name = 'typograf_{field}_hash'.format(field=field_name)
             # update attrs
-            attrs.update(dict(typograf_field_name=typograf_field, typograf_field_hash_name=typograf_field_hash))
+            attrs.update({typograf_field_name: typograf_field, typograf_field_hash_name: typograf_field_hash})
 
         return attrs
 
 
-class TypografModel(models.Model):
+class TypografModel(models.Model, metaclass=TypografModelBase):
 
     """ Base typograf model class """
-
-    __metaclass__ = TypografModelBase
 
     class Meta:
         abstract = True
