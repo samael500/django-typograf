@@ -56,3 +56,4 @@ target/
 ### custom ###
 venv/
 migrations/
+*.sqlite3

@@ -2,6 +2,7 @@ from django.db import models
 from django.db.models.base import ModelBase
 
 from django_typograf.exceptions import TypografFieldError
+from django_typograf.utils import make_typograf
 
 
 class TypografModelBase(ModelBase):
@@ -38,8 +39,9 @@ class TypografModelBase(ModelBase):
         # validate the local_typograf_fields
         for field in local_typograf_fields:
             if field not in attrs:
-                raise TypografFieldError('"{field}" can\'t be typografed cause it is not a field on the model\
-                    "{name}"'.format(field=field, name=name))
+                raise TypografFieldError(
+                    '"{field}" can\'t be typografed cause it is not a field on the model "{name}"'.format(
+                        field=field, name=name))
 
         return local_typograf_fields, inherited_typograf_fields
 
@@ -69,7 +71,17 @@ class TypografModelBase(ModelBase):
 
 class TypografModel(models.Model, metaclass=TypografModelBase):
 
-    """ Base typograf model class """
+    """ Base typograf model class with typograf meta """
 
     class Meta:
         abstract = True
+
+    def _make_typograf(self):
+        """ Run typograf for each field in typografed_fields """
+        typografed_fields = self._meta.typografed_fields
+        return make_typograf(self, typografed_fields)
+
+    def save(self, *args, **kwargs):
+        """ make typograf before saving """
+        self._make_typograf()
+        super(TypografModel, self).save(*args, **kwargs)
