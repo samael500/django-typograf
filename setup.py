@@ -10,6 +10,7 @@ setup(
     author='Maksim Skorokhod',
     author_email='Samael500@gmail.com',
     license='MIT',
-    packages=['django_typograf'],
+    packages=('django_typograf', ),
+    install_requires=('typograf>=0.1', ),
     zip_safe=False
 )
