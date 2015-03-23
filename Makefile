@@ -1,5 +1,5 @@
 test:
-	venv/bin/python test_project/manage.py test -v 2
+	venv/bin/python test_project/manage.py test test_project/ -v 2
 
 pep8:
 	pep8 --exclude=*migrations* --max-line-length=119 --show-source django_typograf/
@@ -14,5 +14,5 @@ lint:
 	make pyflakes
 
 ci_test:
-	python test_project/manage.py test -v 2
+	python test_project/manage.py test test_project/ -v 2
 	make lint
