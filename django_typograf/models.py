@@ -58,7 +58,7 @@ class TypografModelBase(ModelBase):
             # create fields for store typografed text and typografed hash
             typograf_field = models.TextField(blank=True, null=True)
             typograf_field.creation_counter += 0.0001
-            typograf_field_hash = models.IntegerField(blank=True, null=True)
+            typograf_field_hash = models.CharField(max_length=32, blank=True, null=True)
             typograf_field_hash.creation_counter += 0.0001
             # create fields name's
             typograf_field_name = get_typograf_field_name(field_name)
