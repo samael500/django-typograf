@@ -15,6 +15,7 @@ class TypografAdmin(admin.ModelAdmin):
         return exclude
 
     def get_form(self, request, obj=None, **kwargs):
-        self.exclude = self.exclude or ()
-        self.exclude += self._exclude(obj)
+        exclude = self.exclude or ()
+        exclude += self._exclude(obj)
+        kwargs.update(dict(exclude=exclude))
         return super().get_form(request, obj, **kwargs)
