@@ -28,7 +28,7 @@ def make_typograf(instance, fields):
             typograf_text = typograf.try_process_text(text)
             # if was error and text was not change - set hash '0'
             if typograf_text == text:
-                text_hash = 0
+                text_hash = '0'
             # update fields values
             setattr(instance, get_typograf_hash_field_name(field=field), text_hash)
             setattr(instance, get_typograf_field_name(field=field), typograf_text)
