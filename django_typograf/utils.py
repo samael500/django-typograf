@@ -19,7 +19,7 @@ def make_typograf(instance, fields):
         # get field text
         text = getattr(instance, field)
         # get hash from instance already in bd
-        hash_bd = getattr(instance, get_typograf_hash_field_name(field=field))
+        hash_bd = getattr(instance, get_typograf_hash_field_name(field))
         # calculate hash of new text values
         text_hash = str(binascii.crc32(text.encode('utf-8')))
         # if not equals hash_bd and calculated hash
@@ -30,6 +30,6 @@ def make_typograf(instance, fields):
             if typograf_text == text:
                 text_hash = None
             # update fields values
-            setattr(instance, get_typograf_hash_field_name(field=field), text_hash)
-            setattr(instance, get_typograf_field_name(field=field), typograf_text)
+            setattr(instance, get_typograf_hash_field_name(field), text_hash)
+            setattr(instance, get_typograf_field_name(field), typograf_text)
     return instance
