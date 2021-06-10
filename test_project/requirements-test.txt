@@ -1,4 +1,4 @@
-Django==1.7
+Django==2.2.24
 typograf==0.1
 pyflakes==0.8.1
 pylama==6.1.1
